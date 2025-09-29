@@ -21,7 +21,8 @@ while True:
     if not ret:
         break
 
-    faces = classifier.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=3, minSize=(100, 100))
+    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+    faces = classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3, minSize=(100, 100))
 
     num_faces = len(faces)
     for i in range(num_faces):
