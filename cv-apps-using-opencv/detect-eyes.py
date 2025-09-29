@@ -13,10 +13,10 @@ eye_areas = classifier.detectMultiScale(gray_image)
 for (x, y, w, h) in eye_areas:
     cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
     rows = gray_image.shape[0]
-    search_area = gray_image[x:x+w, y:y+h]
+    search_area = gray_image[y:y+h, x:x+w]
     cv2.imshow("Search Area", search_area)
 
-    circles = cv2.HoughCircles(search_area, cv2.HOUGH_GRADIENT, 2, rows/8, param1=100, param2=30, minRadius=1, maxRadius=200)
+    circles = cv2.HoughCircles(search_area, cv2.HOUGH_GRADIENT, 1, 800, param1=100, param2=50, minRadius=50, maxRadius=100)
     for circle in circles[0]:
         center = [int(x + circle[0]), int(y + circle[1])]
         radius = int(circle[2])
